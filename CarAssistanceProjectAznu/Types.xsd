@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.ca.org/types"
+            targetNamespace="http://www.ca.org/types"
+            elementFormDefault="qualified">
+  <xsd:complexType name="Person">
+    <xsd:sequence>
+      <xsd:element name="FirstName" type="xsd:string"/>
+      <xsd:element name="LastName" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Car">
+    <xsd:sequence>
+      <xsd:element name="Make" type="xsd:string"/>
+      <xsd:element name="Model" type="xsd:string"/>
+      <xsd:element name="LicensePlate" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Incident">
+    <xsd:sequence>
+      <xsd:element name="IsCrash" type="xsd:boolean"/>
+      <xsd:element name="HasSmoke" type="xsd:boolean"/>
+      <xsd:element name="DoesStart" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Location">
+    <xsd:sequence>
+      <xsd:element name="City" type="xsd:string"/>
+      <xsd:element name="Street" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
