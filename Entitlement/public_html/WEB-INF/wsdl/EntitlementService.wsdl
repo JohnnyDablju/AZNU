@@ -1,0 +1,53 @@
+<definitions
+    
+     targetNamespace="urn:WSDLEntitlement"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:myTypes="http://www.example.org/assistance"
+     xmlns:tns="urn:WSDLEntitlement"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.example.org/assistance" elementFormDefault="qualified">
+            <xsd:include schemaLocation="Assistance.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="EntitlementInputMessage">
+        <part name="EntitlementInputMessagePart" element="myTypes:EntitlementRequest"/>
+    </message>
+    <message name="EntitlementOutputMessage">
+        <part name="EntitlementOutputMessagePart" element="myTypes:EntitlementResponse"/>
+    </message>
+    <message name="EntitlementErrorMessage">
+        <part name="EntitlementErrorMessagePart" element="myTypes:Fault"/>
+    </message>
+    <portType name="EntitlementPort">
+        <operation name="EntitlementOperation">
+            <input message="tns:EntitlementInputMessage"/>
+            <output message="tns:EntitlementOutputMessage"/>
+            <fault name="EntitlementFault" message="tns:EntitlementErrorMessage"/>
+        </operation>
+    </portType>
+    <binding name="EntitlementPortSOAP11Binding" type="tns:EntitlementPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="EntitlementOperation">
+            <soap:operation style="document" soapAction="urn:WSDLEntitlement/EntitlementOperation"/>
+            <input>
+                <soap:body use="literal" parts="EntitlementInputMessagePart"/>
+            </input>
+            <output>
+                <soap:body use="literal" parts="EntitlementOutputMessagePart"/>
+            </output>
+            <fault name="EntitlementFault">
+                <soap:fault name="EntitlementFault" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="EntitlementService">
+        <port name="EntitlementPort" binding="tns:EntitlementPortSOAP11Binding">
+            <soap12:address location="http://www.example.org"/>
+        </port>
+    </service>
+</definitions>
