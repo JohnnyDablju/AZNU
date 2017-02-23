@@ -1,0 +1,69 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ca.org/assistance" targetNamespace="http://www.example.org/assistance"
+     elementFormDefault="qualified" xmlns:ca="http://www.ca.org/types">
+    <xsd:import schemaLocation="Types.xsd" namespace="http://www.ca.org/types"/>
+    <xsd:element name="AssistanceRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Location" type="ca:Location"/>
+                <xsd:element name="Car" type="ca:Car"/>
+                <xsd:element name="Person" type="ca:Person"/>
+                <xsd:element name="Incident" type="ca:Incident"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AssistanceResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Time" type="xsd:dateTime"/>
+                <xsd:element name="Help" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Fault">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Message" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="CarriageRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Car" type="ca:Car"/>
+                <xsd:element name="Location" type="ca:Location"/>
+                <xsd:element name="Person" type="ca:Person"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="MobileHelpRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Location" type="ca:Location"/>
+                <xsd:element name="Person" type="ca:Person"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelpResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Message" type="xsd:string"/>
+                <xsd:element name="Time" type="xsd:dateTime"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="EntitlementRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Car" type="ca:Car"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="EntitlementResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="HasEntitlement" type="xsd:boolean"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -1,0 +1,4 @@
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <system systemId="http://soabpm-vm:7001//soa-infra/services/default/Mediator/MediatorComponent_ep?WSDL"
+          uri="../com/oracle/xmlns/carassistanceaznu/mediator/mediatorcomponent/MediatorComponent_ep.wsdl"/>
+</catalog>

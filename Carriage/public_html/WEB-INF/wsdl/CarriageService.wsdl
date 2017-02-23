@@ -1,0 +1,53 @@
+<definitions
+    
+     targetNamespace="urn:WSDLCarriage"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:myTypes="http://www.example.org/assistance"
+     xmlns:tns="urn:WSDLCarriage"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.example.org/assistance" elementFormDefault="qualified">
+            <xsd:include schemaLocation="Assistance.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="CarriageInputMessage">
+        <part name="CarriageInputMessagePart" element="myTypes:CarriageRequest"/>
+    </message>
+    <message name="CarriageOutputMessage">
+        <part name="CarriageOutputMessagePart" element="myTypes:HelpResponse"/>
+    </message>
+    <message name="CarriageErrorMessage">
+        <part name="CarriageErrorMessagePart" element="myTypes:Fault"/>
+    </message>
+    <portType name="CarriagePort">
+        <operation name="CarriageOperation">
+            <input message="tns:CarriageInputMessage"/>
+            <output message="tns:CarriageOutputMessage"/>
+            <fault name="CarriageFault" message="tns:CarriageErrorMessage"/>
+        </operation>
+    </portType>
+    <binding name="CarriagePortSOAP11Binding" type="tns:CarriagePort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CarriageOperation">
+            <soap:operation style="document" soapAction="urn:WSDLCarriage/CarriageOperation"/>
+            <input>
+                <soap:body use="literal" parts="CarriageInputMessagePart"/>
+            </input>
+            <output>
+                <soap:body use="literal" parts="CarriageOutputMessagePart"/>
+            </output>
+            <fault name="CarriageFault">
+                <soap:fault name="CarriageFault" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="CarriageService">
+        <port name="CarriagePort" binding="tns:CarriagePortSOAP11Binding">
+            <soap12:address location="http://www.example.org"/>
+        </port>
+    </service>
+</definitions>

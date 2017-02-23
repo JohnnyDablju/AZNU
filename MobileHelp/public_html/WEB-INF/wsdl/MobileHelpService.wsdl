@@ -1,0 +1,53 @@
+<definitions
+    
+     targetNamespace="urn:WSDLMobileHelp"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:myTypes="http://www.example.org/assistance"
+     xmlns:tns="urn:WSDLMobileHelp"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.example.org/assistance" elementFormDefault="qualified">
+            <xsd:include schemaLocation="Assistance.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="MobileHelpInputMessage">
+        <part name="MobileHelpInputMessagePart" element="myTypes:MobileHelpRequest"/>
+    </message>
+    <message name="MobileHelpOutputMessage">
+        <part name="MobileHelpOutputMessagePart" element="myTypes:HelpResponse"/>
+    </message>
+    <message name="MobileHelpErrorMessage">
+        <part name="MobileHelpErrorMessagePart" element="myTypes:Fault"/>
+    </message>
+    <portType name="MobileHelpPort">
+        <operation name="MobileHelpOperation">
+            <input message="tns:MobileHelpInputMessage"/>
+            <output message="tns:MobileHelpOutputMessage"/>
+            <fault name="MobileHelpFault" message="tns:MobileHelpErrorMessage"/>
+        </operation>
+    </portType>
+    <binding name="MobileHelpPortSOAP11Binding" type="tns:MobileHelpPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="MobileHelpOperation">
+            <soap:operation style="document" soapAction="urn:WSDLMobileHelp/MobileHelpOperation"/>
+            <input>
+                <soap:body use="literal" parts="MobileHelpInputMessagePart"/>
+            </input>
+            <output>
+                <soap:body use="literal" parts="MobileHelpOutputMessagePart"/>
+            </output>
+            <fault name="MobileHelpFault">
+                <soap:fault name="MobileHelpFault" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="MobileHelpService">
+        <port name="MobileHelpPort" binding="tns:MobileHelpPortSOAP11Binding">
+            <soap12:address location="http://www.example.org"/>
+        </port>
+    </service>
+</definitions>

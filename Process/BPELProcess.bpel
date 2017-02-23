@@ -1,0 +1,221 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Feb 23 09:59:33 PST 2017
+  Author:  oracle
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess"
+               targetNamespace="http://xmlns.oracle.com/CarAssistanceAznu/Process/BPELProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/CarAssistanceAznu/Process/BPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="urn:WSDLEntitlement" xmlns:ns2="urn:WSDLCarriage"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns3="http://www.example.org/assistance"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns4="http://www.ca.org/types" xmlns:ns5="urn:WSDLMobileHelp">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelprocess_client" partnerLinkType="client:BPELProcess" myRole="BPELProcessProvider"/>
+    <partnerLink name="PartnerLinkEntitlement"
+                 partnerLinkType="ns1:EntitlementPort_PL"
+                 partnerRole="EntitlementPort_Role"/>
+    <partnerLink name="PartnerLinkCarriage"
+                 partnerLinkType="ns2:CarriagePort_PL"
+                 partnerRole="CarriagePort_Role"/>
+    <partnerLink name="PartnerLinkMobileHelp"
+                 partnerLinkType="ns5:MobileHelpPort_PL"
+                 partnerRole="MobileHelpPort_Role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:BPELProcessResponseMessage"/>
+    <variable name="Invoke1_EntitlementOperation_InputVariable"
+              messageType="ns1:EntitlementInputMessage"/>
+    <variable name="Invoke1_EntitlementOperation_OutputVariable"
+              messageType="ns1:EntitlementOutputMessage"/>
+    <variable name="Invoke2_CarriageOperation_InputVariable"
+              messageType="ns2:CarriageInputMessage"/>
+    <variable name="CheckEntitlement_EntitlementOperation_InputVariable"
+              messageType="ns1:EntitlementInputMessage"/>
+    <variable name="CheckEntitlement_EntitlementOperation_OutputVariable"
+              messageType="ns1:EntitlementOutputMessage"/>
+    <variable name="GetCarriage_CarriageOperation_InputVariable"
+              messageType="ns2:CarriageInputMessage"/>
+    <variable name="GetCarriage_CarriageOperation_OutputVariable"
+              messageType="ns2:CarriageOutputMessage"/>
+    <variable name="GetMobileHelp_MobileHelpOperation_InputVariable"
+              messageType="ns5:MobileHelpInputMessage"/>
+    <variable name="GetMobileHelp_MobileHelpOperation_OutputVariable"
+              messageType="ns5:MobileHelpOutputMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelprocess_client" portType="client:BPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Transform1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_1.xsl', $inputVariable.payload)"/>
+        <to variable="CheckEntitlement_EntitlementOperation_InputVariable"
+            part="EntitlementInputMessagePart"/>
+      </copy>
+    </assign>
+    <invoke name="CheckEntitlement"
+            inputVariable="CheckEntitlement_EntitlementOperation_InputVariable"
+            outputVariable="CheckEntitlement_EntitlementOperation_OutputVariable"
+            partnerLink="PartnerLinkEntitlement" portType="ns1:EntitlementPort"
+            operation="EntitlementOperation" bpelx:invokeAsDetail="no"/>
+    <switch name="Switch1">
+      <case condition="bpws:getVariableData('Invoke1_EntitlementOperation_OutputVariable','EntitlementOutputMessagePart','/ns1:EntitlementResponse/ns1:HasEntitlement')=true">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">
+              <![CDATA[Entitled]]>
+            </bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence>
+          <switch name="Switch2">
+            <case condition="bpws:getVariableData('inputVariable','payload','/ns1:AssistanceRequest/ns1:Incident/ns2:IsCrash') = true() or bpws:getVariableData('inputVariable','payload','/ns1:AssistanceRequest/ns1:Incident/ns2:HasSmoke') = true()">
+              <bpelx:annotation>
+                <bpelx:general>
+                  <bpelx:property name="userLabel">
+                    <![CDATA[Serious]]>
+                  </bpelx:property>
+                </bpelx:general>
+              </bpelx:annotation>
+              <sequence>
+                <assign name="Transform2">
+                  <bpelx:annotation>
+                    <bpelx:pattern>transformation</bpelx:pattern>
+                  </bpelx:annotation>
+                  <copy>
+                    <from expression="ora:doXSLTransformForDoc('xsl/Transformation_2.xsl', $inputVariable.payload)"/>
+                    <to variable="GetCarriage_CarriageOperation_InputVariable"
+                        part="CarriageInputMessagePart"/>
+                  </copy>
+                </assign>
+                <invoke name="GetCarriage" bpelx:invokeAsDetail="no"
+                        inputVariable="GetCarriage_CarriageOperation_InputVariable"
+                        outputVariable="GetCarriage_CarriageOperation_OutputVariable"
+                        partnerLink="PartnerLinkCarriage"
+                        portType="ns2:CarriagePort"
+                        operation="CarriageOperation"/>
+                <assign name="Assign1">
+                  <copy>
+                    <from variable="GetCarriage_CarriageOperation_OutputVariable"
+                          part="CarriageOutputMessagePart"
+                          query="/ns1:HelpResponse/ns1:Message"/>
+                    <to variable="outputVariable" part="payload"
+                        query="/ns1:AssistanceResponse/ns1:Help"/>
+                  </copy>
+                  <copy>
+                    <from variable="GetCarriage_CarriageOperation_OutputVariable"
+                          part="CarriageOutputMessagePart"
+                          query="/ns1:HelpResponse/ns1:Time"/>
+                    <to variable="outputVariable" part="payload"
+                        query="/ns1:AssistanceResponse/ns1:Time"/>
+                  </copy>
+                </assign>
+              </sequence>
+            </case>
+            <otherwise>
+              <sequence name="Sequence1">
+                <assign name="Transform3">
+                  <bpelx:annotation>
+                    <bpelx:pattern>transformation</bpelx:pattern>
+                  </bpelx:annotation>
+                  <copy>
+                    <from expression="ora:doXSLTransformForDoc('xsl/Transformation_3.xsl', $inputVariable.payload)"/>
+                    <to variable="GetMobileHelp_MobileHelpOperation_InputVariable"
+                        part="MobileHelpInputMessagePart"/>
+                  </copy>
+                </assign>
+                <invoke name="GetMobileHelp" bpelx:invokeAsDetail="no"
+                        inputVariable="GetMobileHelp_MobileHelpOperation_InputVariable"
+                        outputVariable="GetMobileHelp_MobileHelpOperation_OutputVariable"
+                        partnerLink="PartnerLinkMobileHelp"
+                        portType="ns5:MobileHelpPort"
+                        operation="MobileHelpOperation"/>
+                <assign name="Assign2">
+                  <copy>
+                    <from variable="GetMobileHelp_MobileHelpOperation_OutputVariable"
+                          part="MobileHelpOutputMessagePart"
+                          query="/ns1:HelpResponse/ns1:Message"/>
+                    <to variable="outputVariable" part="payload"
+                        query="/ns1:AssistanceResponse/ns1:Help"/>
+                  </copy>
+                  <copy>
+                    <from variable="GetMobileHelp_MobileHelpOperation_OutputVariable"
+                          part="MobileHelpOutputMessagePart"
+                          query="/ns1:HelpResponse/ns1:Time"/>
+                    <to variable="outputVariable" part="payload"
+                        query="/ns1:AssistanceResponse/ns1:Time"/>
+                  </copy>
+                </assign>
+              </sequence>
+            </otherwise>
+          </switch>
+        </sequence>
+      </case>
+      <otherwise>
+        <assign name="Assign3">
+          <copy>
+            <from expression='"not entitled"'/>
+            <to variable="outputVariable" part="payload"
+                query="/ns1:AssistanceResponse/ns1:Help"/>
+          </copy>
+        </assign>
+      </otherwise>
+    </switch>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="bpelprocess_client" portType="client:BPELProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>
