@@ -1,5 +1,8 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <jws:workspace xmlns:jws="http://xmlns.oracle.com/ide/project">
+   <hash n="adrs-workspace-properties">
+      <value n="adrs-instance-binding" v="DefaultServer"/>
+   </hash>
    <value n="appTemplateId" v="#genericApplicationTemplate"/>
    <hash n="component-versions">
       <value n="oracle.adf.share.dt.migration.jps.JaznCredStoreMigratorHelper" v="11.1.1.1.0"/>
@@ -14,5 +17,11 @@
    </hash>
    <list n="listOfChildren">
       <hash><url n="URL" path="CarAssistanceProjectAznu/CarAssistanceProjectAznu.jpr"/></hash>
+      <hash><url n="URL" path="Carriage/Carriage.jpr"/></hash>
+      <hash><url n="URL" path="Client/Client.jpr"/></hash>
+      <hash><url n="URL" path="Entitlement/Entitlement.jpr"/></hash>
+      <hash><url n="URL" path="Mediator/Mediator.jpr"/></hash>
+      <hash><url n="URL" path="MobileHelp/MobileHelp.jpr"/></hash>
+      <hash><url n="URL" path="Process/Process.jpr"/></hash>
    </list>
 </jws:workspace>

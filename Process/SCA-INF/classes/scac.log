@@ -1,24 +1,24 @@
-Feb 23, 2017 1:28:47 PM oracle.mds
+Feb 23, 2017 5:54:25 PM oracle.mds
 NOTIFICATION: PManager instance is created without multitenancy support as JVM flag "oracle.multitenant.enabled" is not set to enable multitenancy support.
-Feb 23, 2017 1:28:48 PM oracle.security.jps.internal.config.xml.XmlConfigurationFactory initDefaultConfiguration
+Feb 23, 2017 5:54:25 PM oracle.security.jps.internal.config.xml.XmlConfigurationFactory initDefaultConfiguration
 SEVERE: java.io.FileNotFoundException: ./config/jps-config.xml (No such file or directory)
-Feb 23, 2017 1:28:48 PM oracle.mds
+Feb 23, 2017 5:54:25 PM oracle.mds
 NOTIFICATION: Auditing is disabled for component MDS.
-Feb 23, 2017 1:28:48 PM oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
+Feb 23, 2017 5:54:26 PM oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
 INFO: XMLSchema incremental build enabled.
-Feb 23, 2017 1:28:48 PM com.collaxa.cube.CubeLogger info
+Feb 23, 2017 5:54:26 PM com.collaxa.cube.CubeLogger info
 INFO: validating "BPELProcess.bpel" ...
-Feb 23, 2017 1:28:48 PM oracle.integration.platform.blocks.FabricConfigManager <clinit>
+Feb 23, 2017 5:54:26 PM oracle.integration.platform.blocks.FabricConfigManager <clinit>
 WARNING: JRF is unable to determine the current application server platform.
-Feb 23, 2017 1:28:48 PM oracle.integration.platform.blocks.WLSPlatformConfigurationProvider <clinit>
+Feb 23, 2017 5:54:26 PM oracle.integration.platform.blocks.WLSPlatformConfigurationProvider <clinit>
 WARNING: JRF is unable to determine the current application server platform.
-Feb 23, 2017 1:28:49 PM com.collaxa.cube.CubeLogger info
-INFO: Composed "BPELProcess" in 88.7 milliseconds [nodes 21=0+21, 236.7 nodes/sec]
-Feb 23, 2017 1:28:51 PM com.collaxa.cube.CubeLogger info
-INFO: Compiled "BPELProcess" in 1.495 seconds
-Feb 23, 2017 1:28:51 PM com.collaxa.cube.CubeLogger info
-INFO: Gathered 3 files in 31.7 milliseconds
+Feb 23, 2017 5:54:27 PM com.collaxa.cube.CubeLogger info
+INFO: Composed "BPELProcess" in 100.1 milliseconds [nodes 21=0+21, 209.8 nodes/sec]
+Feb 23, 2017 5:54:28 PM com.collaxa.cube.CubeLogger info
+INFO: Compiled "BPELProcess" in 1.333 seconds
+Feb 23, 2017 5:54:28 PM com.collaxa.cube.CubeLogger info
+INFO: Gathered 3 files in 32.8 milliseconds
 
-Feb 23, 2017 1:28:51 PM com.collaxa.cube.CubeLogger info
-INFO: Packaged "BPELProcess" in 69.9 milliseconds
+Feb 23, 2017 5:54:28 PM com.collaxa.cube.CubeLogger info
+INFO: Packaged "BPELProcess" in 72.8 milliseconds
 

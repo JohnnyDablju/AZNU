@@ -5,11 +5,11 @@
    <iconize/>
    <partnerlink_locations>
       <partnerlink name="bpelprocess_client" x="0" y="543" side="left"/>
-      <partnerlink name="PartnerLinkEntitlement" x="1246" y="278" side="right"/>
-      <partnerlink name="PartnerLinkCarriage" x="1246" y="616" side="right"/>
-      <partnerlink name="PartnerLinkMobileHelp" x="1246" y="673" side="right"/>
+      <partnerlink name="PartnerLinkEntitlement" x="1132" y="278" side="right"/>
+      <partnerlink name="PartnerLinkCarriage" x="1132" y="616" side="right"/>
+      <partnerlink name="PartnerLinkMobileHelp" x="1132" y="673" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,26,1378,597" show_swimlanes="true">
+   <graph_layout viewport="0,375,1264,532" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch" type="switch"/>

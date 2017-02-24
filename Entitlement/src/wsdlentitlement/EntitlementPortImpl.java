@@ -36,12 +36,13 @@ public class EntitlementPortImpl {
         if (make.equals("seat"))
         {
             Fault fault = new Fault();
-            fault.setMessage("You are not entitled");
-            throw new EntitlementErrorMessage("You are not entitled", fault);
+            String message = "Cannot retrieve information";
+            fault.setMessage(message);
+            throw new EntitlementErrorMessage(message, fault);
         }
         
         EntitlementResponse response = new EntitlementResponse();
-        if (licensePlate.startsWith("PO"))
+        if (licensePlate.toLowerCase().startsWith("po"))
         {
             response.setHasEntitlement(true);
         }

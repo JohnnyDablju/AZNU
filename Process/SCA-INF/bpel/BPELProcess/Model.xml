@@ -64,7 +64,7 @@
     </assign>
     <invoke name="CheckEntitlement" inputVariable="CheckEntitlement_EntitlementOperation_InputVariable" outputVariable="CheckEntitlement_EntitlementOperation_OutputVariable" partnerLink="PartnerLinkEntitlement" portType="ns1:EntitlementPort" operation="EntitlementOperation" bpelx:invokeAsDetail="no" id="BpInv0"/>
     <switch name="Switch1" id="BpSwt0">
-      <case condition="bpws:getVariableData('CheckEntitlement_EntitlementOperation_OutputVariable','EntitlementOutputMessagePart','/ns3:EntitlementResponse/ns3:HasEntitlement') = true()">
+      <case condition="bpws:getVariableData('CheckEntitlement_EntitlementOperation_OutputVariable','EntitlementOutputMessagePart','/ns3:EntitlementResponse/ns3:HasEntitlement') = 'true'">
         <bpelx:annotation>
           <bpelx:general>
             <bpelx:property name="userLabel">
@@ -74,7 +74,7 @@
         </bpelx:annotation>
         <sequence id="BpSeq1">
           <switch name="Switch2" id="BpSwt1">
-            <case condition="bpws:getVariableData('inputVariable','payload','/ns3:AssistanceRequest/ns3:Incident/ns4:IsCrash') = true() or bpws:getVariableData('inputVariable','payload','/ns3:AssistanceRequest/ns3:Incident/ns4:HasSmoke') = true()">
+            <case condition="bpws:getVariableData('inputVariable','payload','/ns3:AssistanceRequest/ns3:Incident/ns4:IsCrash') = 'true' or bpws:getVariableData('inputVariable','payload','/ns3:AssistanceRequest/ns3:Incident/ns4:HasSmoke') = 'true'">
               <bpelx:annotation>
                 <bpelx:general>
                   <bpelx:property name="userLabel">

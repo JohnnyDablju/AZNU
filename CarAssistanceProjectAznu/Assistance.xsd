@@ -6,11 +6,6 @@
             xmlns:ca="http://www.ca.org/types">
   <xsd:import schemaLocation="Types.xsd" namespace="http://www.ca.org/types"/>
   <xsd:element name="AssistanceRequest">
-    <xsd:annotation>
-      <xsd:documentation>
-        A sample element
-      </xsd:documentation>
-    </xsd:annotation>
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="Location" type="ca:Location"/>
@@ -28,7 +23,7 @@
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="AssistanceFault">
+  <xsd:element name="Fault">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="Message" type="xsd:string"/>
@@ -37,9 +32,41 @@
   </xsd:element>
   <xsd:element name="CarriageRequest">
     <xsd:complexType>
-      <xsd:sequence/>
+      <xsd:sequence>
+        <xsd:element name="Car" type="ca:Car"/>
+        <xsd:element name="Location" type="ca:Location"/>
+        <xsd:element name="Person" type="ca:Person"/>
+      </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="MobileHelpRequest"/>
-  <xsd:element name="HelpResponse"/>
+  <xsd:element name="MobileHelpRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Location" type="ca:Location"/>
+        <xsd:element name="Person" type="ca:Person"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="HelpResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Message" type="xsd:string"/>
+        <xsd:element name="Time" type="xsd:dateTime"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="EntitlementRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Car" type="ca:Car"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+    <xsd:element name="EntitlementResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="HasEntitlement" type="xsd:boolean"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
 </xsd:schema>

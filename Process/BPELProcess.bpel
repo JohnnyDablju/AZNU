@@ -113,7 +113,7 @@
             partnerLink="PartnerLinkEntitlement" portType="ns1:EntitlementPort"
             operation="EntitlementOperation" bpelx:invokeAsDetail="no"/>
     <switch name="Switch1">
-      <case condition="bpws:getVariableData('Invoke1_EntitlementOperation_OutputVariable','EntitlementOutputMessagePart','/ns1:EntitlementResponse/ns1:HasEntitlement')=true">
+      <case condition="bpws:getVariableData('CheckEntitlement_EntitlementOperation_OutputVariable','EntitlementOutputMessagePart','/ns3:EntitlementResponse/ns3:HasEntitlement') = 'true'">
         <bpelx:annotation>
           <bpelx:general>
             <bpelx:property name="userLabel">
@@ -123,7 +123,7 @@
         </bpelx:annotation>
         <sequence>
           <switch name="Switch2">
-            <case condition="bpws:getVariableData('inputVariable','payload','/ns1:AssistanceRequest/ns1:Incident/ns2:IsCrash') = true() or bpws:getVariableData('inputVariable','payload','/ns1:AssistanceRequest/ns1:Incident/ns2:HasSmoke') = true()">
+            <case condition="bpws:getVariableData('inputVariable','payload','/ns3:AssistanceRequest/ns3:Incident/ns4:IsCrash') = 'true' or bpws:getVariableData('inputVariable','payload','/ns3:AssistanceRequest/ns3:Incident/ns4:HasSmoke') = 'true'">
               <bpelx:annotation>
                 <bpelx:general>
                   <bpelx:property name="userLabel">
@@ -152,16 +152,16 @@
                   <copy>
                     <from variable="GetCarriage_CarriageOperation_OutputVariable"
                           part="CarriageOutputMessagePart"
-                          query="/ns1:HelpResponse/ns1:Message"/>
+                          query="/ns3:HelpResponse/ns3:Message"/>
                     <to variable="outputVariable" part="payload"
-                        query="/ns1:AssistanceResponse/ns1:Help"/>
+                        query="/ns3:AssistanceResponse/ns3:Help"/>
                   </copy>
                   <copy>
                     <from variable="GetCarriage_CarriageOperation_OutputVariable"
                           part="CarriageOutputMessagePart"
-                          query="/ns1:HelpResponse/ns1:Time"/>
+                          query="/ns3:HelpResponse/ns3:Time"/>
                     <to variable="outputVariable" part="payload"
-                        query="/ns1:AssistanceResponse/ns1:Time"/>
+                        query="/ns3:AssistanceResponse/ns3:Time"/>
                   </copy>
                 </assign>
               </sequence>
@@ -188,16 +188,16 @@
                   <copy>
                     <from variable="GetMobileHelp_MobileHelpOperation_OutputVariable"
                           part="MobileHelpOutputMessagePart"
-                          query="/ns1:HelpResponse/ns1:Message"/>
+                          query="/ns3:HelpResponse/ns3:Message"/>
                     <to variable="outputVariable" part="payload"
-                        query="/ns1:AssistanceResponse/ns1:Help"/>
+                        query="/ns3:AssistanceResponse/ns3:Help"/>
                   </copy>
                   <copy>
                     <from variable="GetMobileHelp_MobileHelpOperation_OutputVariable"
                           part="MobileHelpOutputMessagePart"
-                          query="/ns1:HelpResponse/ns1:Time"/>
+                          query="/ns3:HelpResponse/ns3:Time"/>
                     <to variable="outputVariable" part="payload"
-                        query="/ns1:AssistanceResponse/ns1:Time"/>
+                        query="/ns3:AssistanceResponse/ns3:Time"/>
                   </copy>
                 </assign>
               </sequence>
@@ -210,7 +210,7 @@
           <copy>
             <from expression='"not entitled"'/>
             <to variable="outputVariable" part="payload"
-                query="/ns1:AssistanceResponse/ns1:Help"/>
+                query="/ns3:AssistanceResponse/ns3:Help"/>
           </copy>
         </assign>
       </otherwise>

@@ -39,7 +39,7 @@
 		<wsdl:operation name="process">
 			<wsdl:input  message="client:BPELProcessRequestMessage" />
 			<wsdl:output message="client:BPELProcessResponseMessage"/>
-		</wsdl:operation>
+  </wsdl:operation>
 	</wsdl:portType>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
