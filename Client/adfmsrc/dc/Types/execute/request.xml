@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="request" Package="dc.Types.execute"
+          BeanClass="dc.Types.execute.request" isJavaBased="false">
+  <AccessorAttribute id="Location" IsCollection="false"
+                     BeanClass="dc.Types.execute.request.Location"/>
+  <AccessorAttribute id="Car" IsCollection="false"
+                     BeanClass="dc.Types.execute.request.Car"/>
+  <AccessorAttribute id="Person" IsCollection="false"
+                     BeanClass="dc.Types.execute.request.Person"/>
+  <AccessorAttribute id="Incident" IsCollection="false"
+                     BeanClass="dc.Types.execute.request.Incident"/>
+</JavaBean>

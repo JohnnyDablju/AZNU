@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:document id="d1">
+    <af:messages id="m1"/>
+    <af:form id="f1">
+      <af:inputText value="#{bindings.FirstName.inputValue}"
+                    label="#{bindings.FirstName.hints.label}"
+                    required="#{bindings.FirstName.hints.mandatory}"
+                    columns="#{bindings.FirstName.hints.displayWidth}"
+                    maximumLength="#{bindings.FirstName.hints.precision}"
+                    shortDesc="#{bindings.FirstName.hints.tooltip}" id="it6">
+        <f:validator binding="#{bindings.FirstName.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.LastName.inputValue}"
+                    label="#{bindings.LastName.hints.label}"
+                    required="#{bindings.LastName.hints.mandatory}"
+                    columns="#{bindings.LastName.hints.displayWidth}"
+                    maximumLength="#{bindings.LastName.hints.precision}"
+                    shortDesc="#{bindings.LastName.hints.tooltip}" id="it7">
+        <f:validator binding="#{bindings.LastName.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.City.inputValue}"
+                    label="#{bindings.City.hints.label}"
+                    required="#{bindings.City.hints.mandatory}"
+                    columns="#{bindings.City.hints.displayWidth}"
+                    maximumLength="#{bindings.City.hints.precision}"
+                    shortDesc="#{bindings.City.hints.tooltip}" id="it1">
+        <f:validator binding="#{bindings.City.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.Street.inputValue}"
+                    label="#{bindings.Street.hints.label}"
+                    required="#{bindings.Street.hints.mandatory}"
+                    columns="#{bindings.Street.hints.displayWidth}"
+                    maximumLength="#{bindings.Street.hints.precision}"
+                    shortDesc="#{bindings.Street.hints.tooltip}" id="it2">
+        <f:validator binding="#{bindings.Street.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.LicensePlate.inputValue}"
+                    label="#{bindings.LicensePlate.hints.label}"
+                    required="#{bindings.LicensePlate.hints.mandatory}"
+                    columns="#{bindings.LicensePlate.hints.displayWidth}"
+                    maximumLength="#{bindings.LicensePlate.hints.precision}"
+                    shortDesc="#{bindings.LicensePlate.hints.tooltip}" id="it3">
+        <f:validator binding="#{bindings.LicensePlate.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.Make.inputValue}"
+                    label="#{bindings.Make.hints.label}"
+                    required="#{bindings.Make.hints.mandatory}"
+                    columns="#{bindings.Make.hints.displayWidth}"
+                    maximumLength="#{bindings.Make.hints.precision}"
+                    shortDesc="#{bindings.Make.hints.tooltip}" id="it4">
+        <f:validator binding="#{bindings.Make.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.Model.inputValue}"
+                    label="#{bindings.Model.hints.label}"
+                    required="#{bindings.Model.hints.mandatory}"
+                    columns="#{bindings.Model.hints.displayWidth}"
+                    maximumLength="#{bindings.Model.hints.precision}"
+                    shortDesc="#{bindings.Model.hints.tooltip}" id="it5">
+        <f:validator binding="#{bindings.Model.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.DoesStart.inputValue}"
+                    label="#{bindings.DoesStart.hints.label}"
+                    required="#{bindings.DoesStart.hints.mandatory}"
+                    columns="#{bindings.DoesStart.hints.displayWidth}"
+                    maximumLength="#{bindings.DoesStart.hints.precision}"
+                    shortDesc="#{bindings.DoesStart.hints.tooltip}" id="it8">
+        <f:validator binding="#{bindings.DoesStart.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.HasSmoke.inputValue}"
+                    label="#{bindings.HasSmoke.hints.label}"
+                    required="#{bindings.HasSmoke.hints.mandatory}"
+                    columns="#{bindings.HasSmoke.hints.displayWidth}"
+                    maximumLength="#{bindings.HasSmoke.hints.precision}"
+                    shortDesc="#{bindings.HasSmoke.hints.tooltip}" id="it9">
+        <f:validator binding="#{bindings.HasSmoke.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.IsCrash.inputValue}"
+                    label="#{bindings.IsCrash.hints.label}"
+                    required="#{bindings.IsCrash.hints.mandatory}"
+                    columns="#{bindings.IsCrash.hints.displayWidth}"
+                    maximumLength="#{bindings.IsCrash.hints.precision}"
+                    shortDesc="#{bindings.IsCrash.hints.tooltip}" id="it10">
+        <f:validator binding="#{bindings.IsCrash.validator}"/>
+      </af:inputText>
+      <af:commandButton actionListener="#{bindings.execute.execute}"
+                        text="execute" disabled="#{!bindings.execute.enabled}"
+                        id="cb1"/>
+      <af:panelGroupLayout layout="vertical" id="pgl1">
+        <af:panelHeader text="Return" id="ph2">
+          <af:table id="md1" rows="#{bindings.Return.rangeSize}"
+                    fetchSize="#{bindings.Return.rangeSize}"
+                    emptyText="#{bindings.Return.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    var="row" value="#{bindings.Return.collectionModel}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.Return.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.Return.collectionModel.makeCurrent}"
+                    rowSelection="single"/>
+        </af:panelHeader>
+        <af:panelHeader text="execute_Result" id="ph1">
+          <af:panelFormLayout partialTriggers="md1" id="pfl1">
+            <af:panelLabelAndMessage label="#{bindings.Time.hints.label}"
+                                     id="plam2">
+              <af:outputText value="#{bindings.Time.inputValue}" id="ot2">
+                <af:convertDateTime pattern="#{bindings.Time.format}"/>
+              </af:outputText>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="#{bindings.Help.hints.label}"
+                                     id="plam1">
+              <af:outputText value="#{bindings.Help.inputValue}" id="ot1"/>
+            </af:panelLabelAndMessage>
+          </af:panelFormLayout>
+        </af:panelHeader>
+      </af:panelGroupLayout>
+    </af:form>
+  </af:document>
+</f:view>

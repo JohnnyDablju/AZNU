@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="controlProcessPageDef"
+                Package="client.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="root" RangeSize="25" DataControl="dc" id="dcIterator"/>
+    <accessorIterator MasterBinding="dcIterator" Binds="execute_parameters"
+                      RangeSize="25" DataControl="dc"
+                      BeanClass="dc.Types.execute"
+                      id="execute_parametersIterator"/>
+    <accessorIterator MasterBinding="execute_parametersIterator" Binds="request"
+                      RangeSize="25" DataControl="dc"
+                      BeanClass="dc.Types.execute.request"
+                      id="requestIterator"/>
+    <accessorIterator MasterBinding="requestIterator" Binds="Location"
+                      RangeSize="25" DataControl="dc"
+                      BeanClass="dc.Types.execute.request.Location"
+                      id="LocationIterator"/>
+    <accessorIterator MasterBinding="requestIterator" Binds="Car" RangeSize="25"
+                      DataControl="dc" BeanClass="dc.Types.execute.request.Car"
+                      id="CarIterator"/>
+    <accessorIterator MasterBinding="requestIterator" Binds="Person"
+                      RangeSize="25" DataControl="dc"
+                      BeanClass="dc.Types.execute.request.Person"
+                      id="PersonIterator"/>
+    <accessorIterator MasterBinding="requestIterator" Binds="Incident"
+                      RangeSize="25" DataControl="dc"
+                      BeanClass="dc.Types.execute.request.Incident"
+                      id="IncidentIterator"/>
+    <methodIterator Binds="execute.result" DataControl="dc" RangeSize="25"
+                    BeanClass="client.dc.execute" id="executeIterator"/>
+    <accessorIterator MasterBinding="executeIterator" Binds="execute_Result"
+                      RangeSize="25" DataControl="dc"
+                      BeanClass="client.dc.execute_Result"
+                      id="execute_ResultIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="LocationIterator" id="City">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LocationIterator" id="Street">
+      <AttrNames>
+        <Item Value="Street"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CarIterator" id="LicensePlate">
+      <AttrNames>
+        <Item Value="LicensePlate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CarIterator" id="Make">
+      <AttrNames>
+        <Item Value="Make"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CarIterator" id="Model">
+      <AttrNames>
+        <Item Value="Model"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PersonIterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PersonIterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="IncidentIterator" id="DoesStart">
+      <AttrNames>
+        <Item Value="DoesStart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="IncidentIterator" id="HasSmoke">
+      <AttrNames>
+        <Item Value="HasSmoke"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="IncidentIterator" id="IsCrash">
+      <AttrNames>
+        <Item Value="IsCrash"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="execute" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="execute" IsViewObjectMethod="false"
+                  DataControl="dc" InstanceName="dc"
+                  ReturnName="data.dc.methodResults.execute_dc_execute_result">
+      <NamedData NDName="request"
+                 NDValue="${bindings.requestIterator.currentRow.dataProvider}"
+                 NDType="java.lang.Object"/>
+    </methodAction>
+    <tree IterBinding="executeIterator" id="Return">
+      <nodeDefinition DefName="client.dc.execute" Name="Return0"/>
+    </tree>
+    <attributeValues IterBinding="execute_ResultIterator" id="Time">
+      <AttrNames>
+        <Item Value="Time"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="execute_ResultIterator" id="Help">
+      <AttrNames>
+        <Item Value="Help"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

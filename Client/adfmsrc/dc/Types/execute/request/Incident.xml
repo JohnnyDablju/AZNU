@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="Incident" Package="dc.Types.execute.request"
+          BeanClass="dc.Types.execute.request.Incident" isJavaBased="false">
+  <Attribute Name="IsCrash" IsNotNull="true" Type="java.lang.Boolean"/>
+  <Attribute Name="HasSmoke" IsNotNull="true" Type="java.lang.Boolean"/>
+  <Attribute Name="DoesStart" IsNotNull="true" Type="java.lang.Boolean"/>
+</JavaBean>

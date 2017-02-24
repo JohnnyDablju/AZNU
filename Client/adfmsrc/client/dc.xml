@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="dc" Package="client" BeanClass="client.dc" isJavaBased="false">
+  <AccessorAttribute id="execute_parameters" IsCollection="false"
+                     BeanClass="dc.Types.execute"/>
+  <MethodAccessor IsCollection="false" Type="client.dc.execute"
+                  BeanClass="client.dc.execute" id="execute"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="request" Type="java.lang.Object" isStructured="false">
+      <Properties>
+        <Property Name="__SET_INITIAL_VALUE" Value="true"/>
+      </Properties>
+    </ParameterInfo>
+  </MethodAccessor>
+</JavaBean>

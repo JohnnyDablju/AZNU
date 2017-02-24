@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="execute_Result" Package="client.dc"
+          BeanClass="client.dc.execute_Result" isJavaBased="false">
+  <Attribute Name="Time" IsUpdateable="0" Type="java.sql.Date"/>
+  <Attribute Name="Help" IsUpdateable="0" Type="java.lang.String"/>
+</JavaBean>

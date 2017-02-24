@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="dc" className="oracle.adf.model.connection.webservice.impl.WebServiceConnectionImpl" xmlns="">
+      <Factory className="oracle.adf.model.connection.webservice.api.WebServiceConnectionFactory"/>
+      <RefAddresses>
+         <XmlRefAddr addrType="WebServiceConnection">
+            <Contents>
+               <wsconnection description="http://soabpm-vm:7001//soa-infra/services/default/Mediator/MediatorComponent_ep?WSDL" service="{http://xmlns.oracle.com/CarAssistanceAznu/Mediator/MediatorComponent}MediatorComponent_ep">
+                  <model name="{http://xmlns.oracle.com/CarAssistanceAznu/Mediator/MediatorComponent}MediatorComponent" xmlns="http://oracle.com/ws/model">
+                     <types xmlns="http://oracle.com/oracle/webservices/mdds">
+                        <complexType elementQualified="true" namespace="http://www.ca.org/types" localPart="Person" prefix="" xmlns="">
+                           <sequence minOccurs="1" maxOccurs="1">
+                              <part name="FirstName" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                              </part>
+                              <part name="LastName" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                              </part>
+                           </sequence>
+                        </complexType>
+                        <complexType elementQualified="true" namespace="http://www.ca.org/types" localPart="Incident" prefix="" xmlns="">
+                           <sequence minOccurs="1" maxOccurs="1">
+                              <part name="IsCrash" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="boolean"/>
+                              </part>
+                              <part name="HasSmoke" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="boolean"/>
+                              </part>
+                              <part name="DoesStart" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="boolean"/>
+                              </part>
+                           </sequence>
+                        </complexType>
+                        <complexType elementQualified="true" namespace="http://www.ca.org/types" localPart="Car" prefix="" xmlns="">
+                           <sequence minOccurs="1" maxOccurs="1">
+                              <part name="Make" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                              </part>
+                              <part name="Model" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                              </part>
+                              <part name="LicensePlate" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                              </part>
+                           </sequence>
+                        </complexType>
+                        <complexType elementQualified="true" namespace="http://www.ca.org/types" localPart="Location" prefix="" xmlns="">
+                           <sequence minOccurs="1" maxOccurs="1">
+                              <part name="City" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                              </part>
+                              <part name="Street" required="true" namespace="http://www.ca.org/types" elementQualified="true">
+                                 <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                              </part>
+                           </sequence>
+                        </complexType>
+                        <types-in-elements/>
+                     </types>
+                     <service name="{http://xmlns.oracle.com/CarAssistanceAznu/Mediator/MediatorComponent}MediatorComponent_ep">
+                        <port name="execute_pt" binding="{http://xmlns.oracle.com/CarAssistanceAznu/Mediator/MediatorComponent}execute_pttBinding" portType="{http://xmlns.oracle.com/CarAssistanceAznu/Mediator/MediatorComponent}execute_ptt">
+                           <soap addressUrl="http://soabpm-vm.site:7001//soa-infra/services/default/Mediator/MediatorComponent_ep" xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                           <operation name="execute">
+                              <soap soapAction="execute" xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                              <input name="" message="{http://xmlns.oracle.com/CarAssistanceAznu/Mediator/MediatorComponent}requestMessage">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="false" namespace="http://www.example.org/assistance" localPart="AssistanceRequest" xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="request" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Location" required="true" namespace="http://www.example.org/assistance" elementQualified="true">
+                                                   <type namespace="http://www.ca.org/types" localPart="Location" prefix=""/>
+                                                </part>
+                                                <part name="Car" required="true" namespace="http://www.example.org/assistance" elementQualified="true">
+                                                   <type namespace="http://www.ca.org/types" localPart="Car" prefix=""/>
+                                                </part>
+                                                <part name="Person" required="true" namespace="http://www.example.org/assistance" elementQualified="true">
+                                                   <type namespace="http://www.ca.org/types" localPart="Person" prefix=""/>
+                                                </part>
+                                                <part name="Incident" required="true" namespace="http://www.example.org/assistance" elementQualified="true">
+                                                   <type namespace="http://www.ca.org/types" localPart="Incident" prefix=""/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </input>
+                              <output name="" message="{http://xmlns.oracle.com/CarAssistanceAznu/Mediator/MediatorComponent}replyMessage">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="true" namespace="http://www.example.org/assistance" localPart="AssistanceResponse" xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="reply" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Time" required="true" namespace="http://www.example.org/assistance" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema" localPart="dateTime"/>
+                                                </part>
+                                                <part name="Help" required="true" namespace="http://www.example.org/assistance" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema" localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </output>
+                           </operation>
+                        </port>
+                     </service>
+                  </model>
+               </wsconnection>
+            </Contents>
+         </XmlRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

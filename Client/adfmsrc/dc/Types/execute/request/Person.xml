@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="Person" Package="dc.Types.execute.request"
+          BeanClass="dc.Types.execute.request.Person" isJavaBased="false">
+  <Attribute Name="FirstName" IsNotNull="true" Type="java.lang.String"/>
+  <Attribute Name="LastName" IsNotNull="true" Type="java.lang.String"/>
+</JavaBean>
